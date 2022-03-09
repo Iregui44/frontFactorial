@@ -43,9 +43,21 @@ export function deleteContact(email) {
     )
 }
 
-
-// export function getKeyContact() {
-//     return getContacts().then(response => {
-//         response.
-//     })
-// }
+export function updateContact(name, lastname, email, phone) {
+    return new Promise((resolve, reject) => fetch(url+`/${email}`, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ nombre: name, apellido: lastname, celular: phone })
+    }).then((response) => {
+        console.log(response);
+        return resolve(response.json());
+    })
+        .catch(error => {
+            console.log(error);
+            return reject(error)
+        })
+    )
+}
